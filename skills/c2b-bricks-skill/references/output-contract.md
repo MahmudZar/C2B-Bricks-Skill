@@ -44,6 +44,8 @@ Required naming:
 
 ```text
 variables.css
+header.css
+footer.css
 
 home.html
 home.css
@@ -62,10 +64,15 @@ Rules:
 
 - Create one `.html` file and one `.css` file for every page.
 - Create `variables.css` for shared site variables, typography scale, color roles, spacing rhythm, radii, shadows, and motion tokens.
+- Create `header.css` when header markup appears in any page.
+- Create `footer.css` when footer markup appears in any page.
 - Tell the user to add the `variables.css` custom properties globally in their Bricks site before importing page files.
-- Link every page to `variables.css` and its own page CSS file.
+- Link every page to `variables.css`, `header.css` when that page includes a header, `footer.css` when that page includes a footer, and its own page CSS file.
 - Navigation links must point to the matching page files, such as `home.html`, `about.html`, and `contact.html`.
 - Page CSS files may use variables from `variables.css`; do not redefine the shared token system inside each page.
+- Page CSS files must not contain header or footer styling. Header styles live in `header.css`; footer styles live in `footer.css`.
+- Header markup can be included in `home.html`, `about.html`, `contact.html`, or any page file that needs it.
+- Footer markup can be included in `home.html`, `about.html`, `contact.html`, or any page file that needs it.
 - Create a `.js` file only when that page has JavaScript behavior.
 - If a page has no JavaScript, say "No JavaScript needed for this page" after that page's CSS file instead of creating empty JS.
 - Use lowercase kebab-case file names: `case-studies.html`, `case-studies.css`, `case-studies.js`.
@@ -112,6 +119,32 @@ variables.css
 ```
 
 ```text
+header.css
+```
+
+```css
+.site-header {
+  display: block;
+  padding: 0;
+  background: var(--site-bg);
+  color: var(--site-text);
+}
+```
+
+```text
+footer.css
+```
+
+```css
+.site-footer {
+  display: block;
+  padding: 0;
+  background: var(--site-text);
+  color: var(--site-bg);
+}
+```
+
+```text
 about.html
 ```
 
@@ -123,9 +156,21 @@ about.html
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>About - Northline Studio</title>
     <link rel="stylesheet" href="variables.css" />
+    <link rel="stylesheet" href="header.css" />
     <link rel="stylesheet" href="about.css" />
+    <link rel="stylesheet" href="footer.css" />
   </head>
   <body>
+    <header class="site-header" data-component="site-header">
+      <div data-bricks="container" class="site-header__container">
+        <a class="site-header__brand" href="home.html">Northline Studio</a>
+        <nav class="site-header__nav" aria-label="Primary navigation">
+          <a class="site-header__link" href="home.html">Home</a>
+          <a class="site-header__link" href="about.html">About</a>
+          <a class="site-header__link" href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
     <main class="about-page">
       <section class="about-hero" data-component="about-hero">
         <div data-bricks="container" class="about-hero__container">
@@ -133,6 +178,11 @@ about.html
         </div>
       </section>
     </main>
+    <footer class="site-footer">
+      <div data-bricks="container" class="site-footer__container">
+        <p class="site-footer__text">Northline Studio builds patient-ready clinic sites.</p>
+      </div>
+    </footer>
     <script src="about.js"></script>
   </body>
 </html>
@@ -204,16 +254,21 @@ For header requests:
 - Deliver the header template only.
 - Include mobile navigation behavior if needed.
 - Include a builder-visible state for menus and mega menus.
+- Put all header CSS in `header.css` when the output is part of a full website.
+- The header HTML may be repeated inside any page HTML file that needs the site header.
 
 For footer requests:
 
 - Deliver the footer template only.
 - Avoid header navigation behavior unless explicitly requested.
+- Put all footer CSS in `footer.css` when the output is part of a full website.
+- The footer HTML may be repeated inside any page HTML file that needs the site footer.
 
 For "header and footer" requests:
 
 - Deliver two separate outputs: Header, then Footer.
 - Each output gets its own HTML, CSS, and JavaScript blocks.
+- For full websites, header and footer markup may appear inside page HTML files, but their CSS remains separated as `header.css` and `footer.css`.
 
 ## Existing Code Edits
 

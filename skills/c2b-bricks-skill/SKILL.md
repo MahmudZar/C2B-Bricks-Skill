@@ -55,11 +55,16 @@ For component or section generation, deliver three separate fenced blocks in thi
 For complete websites with multiple pages, deliver files per page:
 
 - `variables.css` for shared global CSS variables.
+- `header.css` when the site header appears in any page.
+- `footer.css` when the site footer appears in any page.
 - `home.html`, `home.css`, `home.js` when JavaScript exists.
 - `about.html`, `about.css`, `about.js` when JavaScript exists.
 - `contact.html`, `contact.css`, `contact.js` when JavaScript exists.
 - Omit a page `.js` file only when no JavaScript is needed for that page, and say so explicitly.
 - Link every page to `variables.css` and its own page CSS file.
+- Link pages to `header.css` when they include header markup and `footer.css` when they include footer markup.
+- Header markup can be included inside page HTML files, but all header CSS must live in `header.css`.
+- Footer markup can be included inside page HTML files, but all footer CSS must live in `footer.css`.
 - Include full `html`, `head`, `body`, and `main` tags for full website page files because Code2Bricks strips wrapper tags during import.
 - Tell the user to add the `variables.css` custom properties globally in Bricks.
 - Include complete, relevant page content. Full pages should usually include sections such as hero, about/story, features or services, process, proof/testimonials, gallery or portfolio, FAQ, CTA, and contact when they fit the page goal.

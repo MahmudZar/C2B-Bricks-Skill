@@ -310,6 +310,8 @@ For full websites, output linked files and shared variables:
 
 ```text
 variables.css
+header.css
+footer.css
 home.html
 home.css
 about.html
@@ -360,9 +362,14 @@ Page files:
 
 - Include `<!doctype html>`, `html`, `head`, `body`, and `main`.
 - Link `variables.css` before the page CSS.
+- Link `header.css` when the page includes header markup.
+- Link `footer.css` when the page includes footer markup.
 - Link to other pages with real file names.
 - Keep all Bricks-importable sections inside `main`.
 - Use `data-bricks="container"` inside each section where container behavior is intended.
+- Header markup may be included in any page HTML file, but header styles must live in `header.css`.
+- Footer markup may be included in any page HTML file, but footer styles must live in `footer.css`.
+- Do not put header or footer selectors in page-specific CSS files.
 
 Example page shell:
 
@@ -374,21 +381,33 @@ Example page shell:
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Home - Northline Studio</title>
     <link rel="stylesheet" href="variables.css" />
+    <link rel="stylesheet" href="header.css" />
     <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="footer.css" />
   </head>
   <body>
+    <header class="site-header" data-component="site-header">
+      <div data-bricks="container" class="site-header__container">
+        <a class="site-header__brand" href="home.html">Northline Studio</a>
+        <nav class="site-header__nav" aria-label="Primary navigation">
+          <a class="site-header__link" href="home.html">Home</a>
+          <a class="site-header__link" href="about.html">About</a>
+          <a class="site-header__link" href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
     <main class="home-page">
       <section class="home-hero" data-component="home-hero">
         <div data-bricks="container" class="home-hero__container">
-          <nav class="home-hero__nav" aria-label="Primary navigation">
-            <a class="home-hero__link" href="home.html">Home</a>
-            <a class="home-hero__link" href="about.html">About</a>
-            <a class="home-hero__link" href="contact.html">Contact</a>
-          </nav>
           <h1 class="home-hero__title">Clinics patients remember after the first visit</h1>
         </div>
       </section>
     </main>
+    <footer class="site-footer">
+      <div data-bricks="container" class="site-footer__container">
+        <p class="site-footer__text">Northline Studio builds patient-ready clinic sites.</p>
+      </div>
+    </footer>
     <script src="home.js"></script>
   </body>
 </html>

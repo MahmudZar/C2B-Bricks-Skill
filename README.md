@@ -73,6 +73,8 @@ For a multi-page website, agents should output files by page:
 
 ```text
 variables.css
+header.css
+footer.css
 
 home.html
 home.css
@@ -90,6 +92,8 @@ contact.js
 If a page does not need JavaScript, the agent should omit that page's `.js` file and say that no JavaScript is needed for that page.
 
 For full websites, `variables.css` contains the shared global type scale, colors, spacing, radii, shadows, and motion tokens. Add those custom properties globally in Bricks before importing the page files. Each page links to `variables.css` and its own page CSS file, and page navigation uses real file links such as `home.html`, `about.html`, and `contact.html`.
+
+Header and footer markup can be included inside any page HTML file, such as `home.html` or `about.html`. Their CSS stays separate: header styles go in `header.css`, and footer styles go in `footer.css`.
 
 Full website page files include `html`, `head`, `body`, and `main` tags so they are valid browser documents. Code2Bricks strips those wrapper tags during import while keeping the Bricks-safe sections inside `main`.
 
