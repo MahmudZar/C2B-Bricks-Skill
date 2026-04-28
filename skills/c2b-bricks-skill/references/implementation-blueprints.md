@@ -10,21 +10,32 @@ If the user does not provide a design system, include a minimal token system for
 
 ### Typography Tokens
 
-Use `rem` units and `clamp()` for heading scale.
+Use this exact global type scale for the default balanced/symmetrical Bricks output. For full websites, place it in `variables.css` and tell the user to add these variables globally in Bricks.
 
 ```css
 :root {
-  --c2b-h1: clamp(2.25rem, 1.8214rem + 2.1429vw, 3.75rem);
-  --c2b-h2: clamp(1.875rem, 1.5536rem + 1.6071vw, 3rem);
-  --c2b-h3: clamp(1.5rem, 1.2857rem + 1.0714vw, 2.25rem);
-  --c2b-h4: clamp(1.25rem, 1.0714rem + 0.8929vw, 1.875rem);
-  --c2b-text-12: 0.75rem;
-  --c2b-text-14: 0.875rem;
-  --c2b-text-16: 1rem;
-  --c2b-text-18: 1.125rem;
-  --c2b-text-20: 1.25rem;
+  --h1: clamp(2.25rem, 1.8214rem + 2.1429vw, 3.75rem);
+  --h2: clamp(1.875rem, 1.5536rem + 1.6071vw, 3rem);
+  --h3: clamp(1.5rem, 1.2857rem + 1.0714vw, 2.25rem);
+  --h4: clamp(1.25rem, 1.0714rem + 0.8929vw, 1.875rem);
+
+  --text-12: 0.75rem;
+  --text-14: 0.875rem;
+  --text-16: 1rem;
+  --text-18: 1.125rem;
+  --text-20: 1.25rem;
 }
 ```
+
+Use these variables consistently:
+
+- H1 elements use `font-size: var(--h1)`.
+- H2 elements use `font-size: var(--h2)`.
+- H3 elements use `font-size: var(--h3)`.
+- H4 elements use `font-size: var(--h4)`.
+- Body and UI copy use `--text-12` through `--text-20`.
+
+Only deviate for a deliberate high-variance editorial design, and keep the base variables available.
 
 ### Motion Tokens
 
@@ -278,3 +289,81 @@ For multi-section pages, use independent BEM blocks per major section:
 ```
 
 Do not use one giant block for an entire page unless the page is truly a single component.
+
+## Full Website Blueprint
+
+For full websites, output linked files and shared variables:
+
+```text
+variables.css
+home.html
+home.css
+about.html
+about.css
+contact.html
+contact.css
+```
+
+Include page `.js` files only when a page needs behavior.
+
+`variables.css`:
+
+```css
+:root {
+  --h1: clamp(2.25rem, 1.8214rem + 2.1429vw, 3.75rem);
+  --h2: clamp(1.875rem, 1.5536rem + 1.6071vw, 3rem);
+  --h3: clamp(1.5rem, 1.2857rem + 1.0714vw, 2.25rem);
+  --h4: clamp(1.25rem, 1.0714rem + 0.8929vw, 1.875rem);
+
+  --text-12: 0.75rem;
+  --text-14: 0.875rem;
+  --text-16: 1rem;
+  --text-18: 1.125rem;
+  --text-20: 1.25rem;
+
+  --site-bg: #f7f4ee;
+  --site-text: #171512;
+  --site-muted: #6d665c;
+  --site-accent: #9c5b32;
+  --site-border: rgba(23, 21, 18, 0.14);
+  --site-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+```
+
+Page files:
+
+- Include `<!doctype html>`, `html`, `head`, `body`, and `main`.
+- Link `variables.css` before the page CSS.
+- Link to other pages with real file names.
+- Keep all Bricks-importable sections inside `main`.
+- Use `data-bricks="container"` inside each section where container behavior is intended.
+
+Example page shell:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home - Northline Studio</title>
+    <link rel="stylesheet" href="variables.css" />
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <main class="home-page">
+      <section class="home-hero" data-component="home-hero">
+        <div data-bricks="container" class="home-hero__container">
+          <nav class="home-hero__nav" aria-label="Primary navigation">
+            <a class="home-hero__link" href="home.html">Home</a>
+            <a class="home-hero__link" href="about.html">About</a>
+            <a class="home-hero__link" href="contact.html">Contact</a>
+          </nav>
+          <h1 class="home-hero__title">Clinics patients remember after the first visit</h1>
+        </div>
+      </section>
+    </main>
+    <script src="home.js"></script>
+  </body>
+</html>
+```

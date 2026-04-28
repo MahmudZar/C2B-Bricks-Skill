@@ -11,21 +11,33 @@ const getArg = (name) => {
 const htmlPath = getArg("--html");
 const cssPath = getArg("--css");
 const jsPath = getArg("--js");
+const isFullPage = args.includes("--full-page");
 const errors = [];
 const warnings = [];
 
-if (!htmlPath || !cssPath || !jsPath) {
-  console.error("Usage: node validate-output.mjs --html output.html --css output.css --js output.js");
+if (!htmlPath || !cssPath) {
+  console.error("Usage: node validate-output.mjs --html output.html --css output.css [--js output.js] [--full-page]");
   process.exit(1);
 }
 
 const html = readFileSync(htmlPath, "utf8");
 const css = readFileSync(cssPath, "utf8");
-const js = readFileSync(jsPath, "utf8");
+const js = jsPath ? readFileSync(jsPath, "utf8") : "";
 const combined = `${html}\n${css}\n${js}`;
 
-if (/<\/?(html|head|body|main)\b/i.test(html)) {
+if (!isFullPage && /<\/?(html|head|body|main)\b/i.test(html)) {
   errors.push("HTML should start at the component root and not include html, head, body, or main.");
+}
+
+if (isFullPage) {
+  for (const tag of ["html", "head", "body", "main"]) {
+    const pattern = new RegExp(`<${tag}\\b`, "i");
+    if (!pattern.test(html)) errors.push(`Full page output must include a ${tag} tag.`);
+  }
+
+  if (!/href=["']variables\.css["']/i.test(html)) {
+    warnings.push("Full page output should link variables.css before page-specific CSS.");
+  }
 }
 
 if (!/data-bricks=["']container["']/.test(html)) {

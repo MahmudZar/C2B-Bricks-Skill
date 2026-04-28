@@ -73,7 +73,8 @@ Do not use emojis in markup, text content, alt text, or code comments unless the
 - Avoid Inter for "premium" or creative work unless the user provides it as the brand font.
 - Prefer distinctive sans fonts such as Geist, Outfit, Satoshi, Cabinet Grotesk, or a strong system fallback.
 - Use serif fonts only for editorial, luxury, cultural, or publication-style designs. Never use serif as the default for technical dashboards.
-- Use `clamp()` for fluid heading sizes.
+- Use the global heading and text variables from `references/implementation-blueprints.md` for balanced/symmetrical output.
+- For full websites, place heading and text variables in `variables.css` and reuse them across all pages.
 - Keep paragraphs around 55 to 75 characters per line.
 - Use color, spacing, weight, and rhythm for hierarchy, not just huge font sizes.
 
@@ -81,9 +82,16 @@ Example:
 
 ```css
 :root {
-  --c2b-h1: clamp(3rem, 7vw, 6.75rem);
-  --c2b-h2: clamp(2.25rem, 4vw, 4.5rem);
-  --c2b-text: clamp(1rem, 1.1vw, 1.125rem);
+  --h1: clamp(2.25rem, 1.8214rem + 2.1429vw, 3.75rem);
+  --h2: clamp(1.875rem, 1.5536rem + 1.6071vw, 3rem);
+  --h3: clamp(1.5rem, 1.2857rem + 1.0714vw, 2.25rem);
+  --h4: clamp(1.25rem, 1.0714rem + 0.8929vw, 1.875rem);
+
+  --text-12: 0.75rem;
+  --text-14: 0.875rem;
+  --text-16: 1rem;
+  --text-18: 1.125rem;
+  --text-20: 1.25rem;
 }
 
 .feature__title {
@@ -91,7 +99,7 @@ Example:
   max-width: 10ch;
   margin: 0;
   font-family: "Satoshi", "Inter", system-ui, sans-serif;
-  font-size: var(--c2b-h1);
+  font-size: var(--h1);
   line-height: 0.92;
   letter-spacing: -0.06em;
 }

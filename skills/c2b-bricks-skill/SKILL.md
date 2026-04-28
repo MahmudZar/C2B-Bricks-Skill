@@ -54,10 +54,14 @@ For component or section generation, deliver three separate fenced blocks in thi
 
 For complete websites with multiple pages, deliver files per page:
 
+- `variables.css` for shared global CSS variables.
 - `home.html`, `home.css`, `home.js` when JavaScript exists.
 - `about.html`, `about.css`, `about.js` when JavaScript exists.
 - `contact.html`, `contact.css`, `contact.js` when JavaScript exists.
 - Omit a page `.js` file only when no JavaScript is needed for that page, and say so explicitly.
+- Link every page to `variables.css` and its own page CSS file.
+- Include full `html`, `head`, `body`, and `main` tags for full website page files because Code2Bricks strips wrapper tags during import.
+- Tell the user to add the `variables.css` custom properties globally in Bricks.
 
 For header and footer requests, deliver each template separately. Do not merge a header and footer into one combined snippet unless the user explicitly requests a combined demo.
 
@@ -110,5 +114,7 @@ When checking generated Bricks output saved to files, run:
 ```bash
 node skills/c2b-bricks-skill/scripts/validate-output.mjs --html output.html --css output.css --js output.js
 ```
+
+If no JavaScript file exists, omit `--js`. For full page files with `html`, `head`, `body`, and `main`, add `--full-page`.
 
 If a validator fails, fix the reported issue and run it again.

@@ -72,6 +72,8 @@ JavaScript
 For a multi-page website, agents should output files by page:
 
 ```text
+variables.css
+
 home.html
 home.css
 home.js
@@ -86,6 +88,10 @@ contact.js
 ```
 
 If a page does not need JavaScript, the agent should omit that page's `.js` file and say that no JavaScript is needed for that page.
+
+For full websites, `variables.css` contains the shared global type scale, colors, spacing, radii, shadows, and motion tokens. Add those custom properties globally in Bricks before importing the page files. Each page links to `variables.css` and its own page CSS file, and page navigation uses real file links such as `home.html`, `about.html`, and `contact.html`.
+
+Full website page files include `html`, `head`, `body`, and `main` tags so they are valid browser documents. Code2Bricks strips those wrapper tags during import while keeping the Bricks-safe sections inside `main`.
 
 ## Bricks Rules Enforced
 
@@ -167,3 +173,5 @@ Validate generated output saved as files:
 ```bash
 node skills/c2b-bricks-skill/scripts/validate-output.mjs --html output.html --css output.css --js output.js
 ```
+
+If the page has no JavaScript, omit `--js`. For full page files with `html`, `head`, `body`, and `main`, add `--full-page`.

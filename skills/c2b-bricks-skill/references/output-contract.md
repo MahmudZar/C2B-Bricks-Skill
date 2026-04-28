@@ -8,8 +8,8 @@ Classify the request before output:
 
 - Component or section snippet: deliver three fenced blocks.
 - Header or footer template: deliver separate template outputs.
-- Full single page: deliver page files.
-- Multi-page website: deliver one HTML file, one CSS file, and one optional JS file per page.
+- Full single page: deliver full page files.
+- Multi-page website: deliver linked page files plus shared `variables.css`.
 - Existing code edit: preserve the user's provided delivery format unless it violates Bricks constraints.
 
 ## Component Output
@@ -38,11 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ## Full Page And Multi-Page Website Output
 
-When the user asks for a complete website with multiple pages, output files by page name.
+When the user asks for a complete website, full site, or multiple linked pages, treat it as a real website instead of isolated page snippets.
 
 Required naming:
 
 ```text
+variables.css
+
 home.html
 home.css
 home.js
@@ -59,27 +61,66 @@ contact.js
 Rules:
 
 - Create one `.html` file and one `.css` file for every page.
+- Create `variables.css` for shared site variables, typography scale, color roles, spacing rhythm, radii, shadows, and motion tokens.
+- Tell the user to add the `variables.css` custom properties globally in their Bricks site before importing page files.
+- Link every page to `variables.css` and its own page CSS file.
+- Navigation links must point to the matching page files, such as `home.html`, `about.html`, and `contact.html`.
+- Page CSS files may use variables from `variables.css`; do not redefine the shared token system inside each page.
 - Create a `.js` file only when that page has JavaScript behavior.
 - If a page has no JavaScript, say "No JavaScript needed for this page" after that page's CSS file instead of creating empty JS.
 - Use lowercase kebab-case file names: `case-studies.html`, `case-studies.css`, `case-studies.js`.
-- Keep each page self-contained unless the user explicitly requests shared global files.
-- If shared files are requested, use `shared.css` and `shared.js`, but still include page-specific files when page-specific styles or behavior exist.
+- Do not use `shared.css` for tokens. Use `variables.css`.
+- Use `shared.js` only if the user asks for shared JavaScript or multiple pages genuinely share the same behavior.
 - Do not merge all pages into one HTML file unless the user explicitly asks for a single-page demo.
-- Include navigation links that point to the correct page file names.
 - Keep Bricks section structure inside each page. For Code2Bricks page imports, each major page section should still use Bricks-compatible markup and BEM.
+- For Code2Bricks full-page imports, include full document structure with `html`, `head`, `body`, and `main`. Code2Bricks strips those wrapper tags during import, so full page files should remain valid browser documents while preserving Bricks-safe section markup inside `main`.
 
 Example output shape:
+
+```text
+variables.css
+```
+
+```css
+:root {
+  --h1: clamp(2.25rem, 1.8214rem + 2.1429vw, 3.75rem);
+  --h2: clamp(1.875rem, 1.5536rem + 1.6071vw, 3rem);
+  --h3: clamp(1.5rem, 1.2857rem + 1.0714vw, 2.25rem);
+  --h4: clamp(1.25rem, 1.0714rem + 0.8929vw, 1.875rem);
+
+  --text-12: 0.75rem;
+  --text-14: 0.875rem;
+  --text-16: 1rem;
+  --text-18: 1.125rem;
+  --text-20: 1.25rem;
+}
+```
 
 ```text
 about.html
 ```
 
 ```html
-<section class="about-hero" data-component="about-hero">
-  <div data-bricks="container" class="about-hero__container">
-    <h1 class="about-hero__title">We build clinics patients remember</h1>
-  </div>
-</section>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About - Northline Studio</title>
+    <link rel="stylesheet" href="variables.css" />
+    <link rel="stylesheet" href="about.css" />
+  </head>
+  <body>
+    <main class="about-page">
+      <section class="about-hero" data-component="about-hero">
+        <div data-bricks="container" class="about-hero__container">
+          <h1 class="about-hero__title">We build clinics patients remember</h1>
+        </div>
+      </section>
+    </main>
+    <script src="about.js"></script>
+  </body>
+</html>
 ```
 
 ```text
@@ -116,13 +157,12 @@ No JavaScript needed for this page.
 
 ## HTML Boundaries
 
-- Start at the component root.
-- Do not include `html`, `head`, `body`, or `main`.
+- For component, section, header, and footer snippets, start at the component root.
+- For component, section, header, and footer snippets, do not include `html`, `head`, `body`, or `main`.
+- For full page or full website files intended for Code2Bricks import, include `html`, `head`, `body`, and `main`.
 - Use semantic elements where appropriate.
 - Use one clear component root with `data-component="block-name"` when JavaScript exists.
 - Use realistic content. Do not output lorem ipsum unless requested.
-
-For full standalone page files, include complete page HTML only when the user explicitly asks for standalone browser files. If the output is meant for Code2Bricks or Bricks section import, keep the page as Bricks-compatible sections without `html`, `head`, or `body`.
 
 ## CSS Boundaries
 
