@@ -62,6 +62,7 @@ For complete websites with multiple pages, deliver files per page:
 - Link every page to `variables.css` and its own page CSS file.
 - Include full `html`, `head`, `body`, and `main` tags for full website page files because Code2Bricks strips wrapper tags during import.
 - Tell the user to add the `variables.css` custom properties globally in Bricks.
+- Include complete, relevant page content. Full pages should usually include sections such as hero, about/story, features or services, process, proof/testimonials, gallery or portfolio, FAQ, CTA, and contact when they fit the page goal.
 
 For header and footer requests, deliver each template separately. Do not merge a header and footer into one combined snippet unless the user explicitly requests a combined demo.
 
@@ -85,6 +86,7 @@ Avoid generic AI patterns: centered hero by default, equal three-card rows, purp
 - Avoid em dashes, smart quotes, corporate filler, and AI landing-page phrases.
 - Prefer concrete claims, visible details, and direct verbs.
 - Use clear CTA labels that describe the action or value.
+- Do not create short, incomplete content. Each generated page needs enough relevant sections and copy to feel usable.
 
 ## Quality Bar
 

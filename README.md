@@ -93,6 +93,8 @@ For full websites, `variables.css` contains the shared global type scale, colors
 
 Full website page files include `html`, `head`, `body`, and `main` tags so they are valid browser documents. Code2Bricks strips those wrapper tags during import while keeping the Bricks-safe sections inside `main`.
 
+Full pages should not be thin demos. The skill asks agents to include complete, relevant page content: hero, about/story, features or services, process, proof or testimonials, gallery or portfolio, FAQ, CTA, and contact sections when they fit the page goal.
+
 ## Bricks Rules Enforced
 
 - Use plain HTML, CSS, and browser JavaScript.
@@ -107,6 +109,8 @@ Full website page files include `html`, `head`, `body`, and `main` tags so they 
 - Force normal text-flow elements to `display: block`.
 - Keep CSS component-scoped.
 - Include `prefers-reduced-motion` when motion exists.
+- Use the shared heading, text, and line-height variables from `variables.css`.
+- Use `font-weight: 600` for headings by default.
 - Avoid `transition: all`, `scale(0)` entry animations, global resets, and invented Bricks attributes.
 
 ## Scope

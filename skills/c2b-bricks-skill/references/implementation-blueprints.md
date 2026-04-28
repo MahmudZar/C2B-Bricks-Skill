@@ -24,16 +24,29 @@ Use this exact global type scale for the default balanced/symmetrical Bricks out
   --text-16: 1rem;
   --text-18: 1.125rem;
   --text-20: 1.25rem;
+
+  --lh-h1: clamp(2.5rem, 1.823rem + 2.5189vw, 3.75rem);
+  --lh-h2: clamp(2.25rem, 1.8438rem + 1.5113vw, 3rem);
+  --lh-h3: clamp(2rem, 1.7292rem + 1.0076vw, 2.5rem);
+  --lh-h4: clamp(1.75rem, 1.4792rem + 1.0076vw, 2.25rem);
+  --lh-body-20: 1.75rem;
+  --lh-body-18: 1.75rem;
+  --lh-body-16: 1.5rem;
+  --lh-body-14: 1.25rem;
+  --lh-body-12: 1rem;
+  --heading-line-height: calc(4px + 2ex);
+  --text-line-height: calc(6px + 2ex);
 }
 ```
 
 Use these variables consistently:
 
-- H1 elements use `font-size: var(--h1)`.
-- H2 elements use `font-size: var(--h2)`.
-- H3 elements use `font-size: var(--h3)`.
-- H4 elements use `font-size: var(--h4)`.
-- Body and UI copy use `--text-12` through `--text-20`.
+- H1 elements use `font-size: var(--h1)` and either `line-height: var(--lh-h1)` or `line-height: var(--heading-line-height)`.
+- H2 elements use `font-size: var(--h2)` and either `line-height: var(--lh-h2)` or `line-height: var(--heading-line-height)`.
+- H3 elements use `font-size: var(--h3)` and either `line-height: var(--lh-h3)` or `line-height: var(--heading-line-height)`.
+- H4 elements use `font-size: var(--h4)` and either `line-height: var(--lh-h4)` or `line-height: var(--heading-line-height)`.
+- Body and UI copy use `--text-12` through `--text-20` with the matching `--lh-body-*` token or `--text-line-height`.
+- All headings use `font-weight: 600` by default. Do not use `700`, `800`, or `900` unless the user explicitly requests a heavier brand style.
 
 Only deviate for a deliberate high-variance editorial design, and keep the base variables available.
 
@@ -167,8 +180,8 @@ Use this blueprint as the default mental model for a section with content and me
 .feature-showcase__eyebrow {
   margin: 0 0 1rem;
   color: var(--feature-showcase-accent);
-  font-size: 0.875rem;
-  line-height: 1.4;
+  font-size: var(--text-14);
+  line-height: var(--lh-body-14);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -177,7 +190,8 @@ Use this blueprint as the default mental model for a section with content and me
   margin: 0;
   color: var(--feature-showcase-text);
   font-size: clamp(2.25rem, 5vw, 4.75rem);
-  line-height: 0.96;
+  font-weight: 600;
+  line-height: var(--heading-line-height);
   letter-spacing: -0.055em;
 }
 
@@ -185,8 +199,8 @@ Use this blueprint as the default mental model for a section with content and me
   max-width: 36rem;
   margin: 1.25rem 0 0;
   color: var(--feature-showcase-muted);
-  font-size: 1.125rem;
-  line-height: 1.65;
+  font-size: var(--text-18);
+  line-height: var(--lh-body-18);
 }
 
 .feature-showcase__button {
@@ -321,6 +335,18 @@ Include page `.js` files only when a page needs behavior.
   --text-18: 1.125rem;
   --text-20: 1.25rem;
 
+  --lh-h1: clamp(2.5rem, 1.823rem + 2.5189vw, 3.75rem);
+  --lh-h2: clamp(2.25rem, 1.8438rem + 1.5113vw, 3rem);
+  --lh-h3: clamp(2rem, 1.7292rem + 1.0076vw, 2.5rem);
+  --lh-h4: clamp(1.75rem, 1.4792rem + 1.0076vw, 2.25rem);
+  --lh-body-20: 1.75rem;
+  --lh-body-18: 1.75rem;
+  --lh-body-16: 1.5rem;
+  --lh-body-14: 1.25rem;
+  --lh-body-12: 1rem;
+  --heading-line-height: calc(4px + 2ex);
+  --text-line-height: calc(6px + 2ex);
+
   --site-bg: #f7f4ee;
   --site-text: #171512;
   --site-muted: #6d665c;
@@ -367,3 +393,22 @@ Example page shell:
   </body>
 </html>
 ```
+
+## Complete Page Content
+
+Do not generate thin full-page or full-site outputs. Each page should include the sections needed for that page to feel complete and usable.
+
+Common sections to consider:
+
+- Hero: clear value, strong heading, supporting copy, primary CTA, proof or visual.
+- About: who the business is, what makes it different, founder or team context.
+- Features or services: concrete offerings with benefits and proof.
+- Process: how the customer gets the result, step by step.
+- Proof: testimonials, logos, metrics, reviews, case studies, or before-and-after details.
+- Gallery or portfolio: visual evidence when relevant to the industry.
+- Pricing or packages: only when the business model calls for it.
+- FAQ: answers to buying objections and practical concerns.
+- CTA: a final action tied to the page goal.
+- Contact: address, email, phone, form fields, hours, map placeholder, or next-step instructions.
+
+Use relevant sections, not every section blindly. Home pages usually need hero, proof, features/services, process, testimonials or gallery, FAQ, and CTA. About pages usually need hero, story, principles, team or founder, proof, and CTA. Contact pages usually need hero, contact methods, form, location or hours, FAQ, and CTA.

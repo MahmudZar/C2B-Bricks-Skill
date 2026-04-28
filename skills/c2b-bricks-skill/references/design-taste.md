@@ -75,6 +75,8 @@ Do not use emojis in markup, text content, alt text, or code comments unless the
 - Use serif fonts only for editorial, luxury, cultural, or publication-style designs. Never use serif as the default for technical dashboards.
 - Use the global heading and text variables from `references/implementation-blueprints.md` for balanced/symmetrical output.
 - For full websites, place heading and text variables in `variables.css` and reuse them across all pages.
+- Use `font-weight: 600` for all headings by default. It is cleaner than `700` or `800` in most Bricks marketing layouts.
+- Use the matching line-height tokens from `variables.css`: `--lh-h1` through `--lh-h4`, `--lh-body-*`, `--heading-line-height`, and `--text-line-height`.
 - Keep paragraphs around 55 to 75 characters per line.
 - Use color, spacing, weight, and rhythm for hierarchy, not just huge font sizes.
 
@@ -92,6 +94,18 @@ Example:
   --text-16: 1rem;
   --text-18: 1.125rem;
   --text-20: 1.25rem;
+
+  --lh-h1: clamp(2.5rem, 1.823rem + 2.5189vw, 3.75rem);
+  --lh-h2: clamp(2.25rem, 1.8438rem + 1.5113vw, 3rem);
+  --lh-h3: clamp(2rem, 1.7292rem + 1.0076vw, 2.5rem);
+  --lh-h4: clamp(1.75rem, 1.4792rem + 1.0076vw, 2.25rem);
+  --lh-body-20: 1.75rem;
+  --lh-body-18: 1.75rem;
+  --lh-body-16: 1.5rem;
+  --lh-body-14: 1.25rem;
+  --lh-body-12: 1rem;
+  --heading-line-height: calc(4px + 2ex);
+  --text-line-height: calc(6px + 2ex);
 }
 
 .feature__title {
@@ -100,7 +114,8 @@ Example:
   margin: 0;
   font-family: "Satoshi", "Inter", system-ui, sans-serif;
   font-size: var(--h1);
-  line-height: 0.92;
+  font-weight: 600;
+  line-height: var(--heading-line-height);
   letter-spacing: -0.06em;
 }
 ```

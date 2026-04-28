@@ -74,6 +74,9 @@ Rules:
 - Do not merge all pages into one HTML file unless the user explicitly asks for a single-page demo.
 - Keep Bricks section structure inside each page. For Code2Bricks page imports, each major page section should still use Bricks-compatible markup and BEM.
 - For Code2Bricks full-page imports, include full document structure with `html`, `head`, `body`, and `main`. Code2Bricks strips those wrapper tags during import, so full page files should remain valid browser documents while preserving Bricks-safe section markup inside `main`.
+- Do not generate thin or incomplete pages. Include the relevant sections each page needs to feel complete.
+- Consider common page sections: hero, about/story, features/services, process, proof/testimonials, gallery/portfolio, pricing/packages, FAQ, CTA, and contact.
+- Use sections based on page intent. Do not include every section blindly, but include enough relevant content that the page can stand on its own.
 
 Example output shape:
 
@@ -93,6 +96,18 @@ variables.css
   --text-16: 1rem;
   --text-18: 1.125rem;
   --text-20: 1.25rem;
+
+  --lh-h1: clamp(2.5rem, 1.823rem + 2.5189vw, 3.75rem);
+  --lh-h2: clamp(2.25rem, 1.8438rem + 1.5113vw, 3rem);
+  --lh-h3: clamp(2rem, 1.7292rem + 1.0076vw, 2.5rem);
+  --lh-h4: clamp(1.75rem, 1.4792rem + 1.0076vw, 2.25rem);
+  --lh-body-20: 1.75rem;
+  --lh-body-18: 1.75rem;
+  --lh-body-16: 1.5rem;
+  --lh-body-14: 1.25rem;
+  --lh-body-12: 1rem;
+  --heading-line-height: calc(4px + 2ex);
+  --text-line-height: calc(6px + 2ex);
 }
 ```
 
