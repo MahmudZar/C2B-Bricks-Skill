@@ -39,6 +39,8 @@ Generate production-ready Bricks Builder output using plain HTML, CSS, and JavaS
 - Use semantic roots such as `section`, `header`, `footer`, `nav`, `figure`, and `blockquote` where appropriate.
 - Mark intended Bricks containers with `data-bricks="container"`.
 - Use strict BEM classes. No utility-class piles.
+- Use `padding-inline: var(--site-gutter)` and `padding-block: var(--sctn-block-padding)` on top-level sections.
+- Use `inline-size: 100%`, `max-inline-size: var(--content-width)`, and `margin-inline: auto` on Bricks containers.
 - Make all JavaScript multi-instance safe by scoping behavior to a component root and using `data-*` hooks.
 - Wrap all JavaScript in `DOMContentLoaded`.
 - Include builder-visible states for hidden JS-driven content such as accordions, dialogs, mega menus, tabs, and mobile navigation.

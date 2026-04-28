@@ -114,6 +114,8 @@ Full pages should not be thin demos. The skill asks agents to include complete, 
 - Keep CSS component-scoped.
 - Include `prefers-reduced-motion` when motion exists.
 - Use the shared heading, text, and line-height variables from `variables.css`.
+- Use shared section spacing variables: `--sctn-inline-padding`, `--sctn-block-padding`, `--site-gutter`, and `--content-width`.
+- Apply section padding on the section and width constraints on the Bricks container.
 - Use `font-weight: 600` for headings by default.
 - Avoid `transition: all`, `scale(0)` entry animations, global resets, and invented Bricks attributes.
 

@@ -32,6 +32,25 @@ Use this marker only for intended containers. Do not invent other `data-bricks` 
 
 Bricks and builder canvases can alter defaults. Be explicit.
 
+For top-level sections, use the shared site gutter and section block padding:
+
+```css
+.hero-sctn {
+  display: block;
+  padding-inline: var(--site-gutter);
+  padding-block: var(--sctn-block-padding);
+}
+
+.hero-sctn__container {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: var(--content-width);
+  margin-inline: auto;
+}
+```
+
+Section gutters belong on the section. Width constraints belong on the Bricks container.
+
 For flex containers, define:
 
 ```css

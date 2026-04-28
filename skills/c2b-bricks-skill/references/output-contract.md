@@ -115,6 +115,11 @@ variables.css
   --lh-body-12: 1rem;
   --heading-line-height: calc(4px + 2ex);
   --text-line-height: calc(6px + 2ex);
+
+  --sctn-inline-padding: clamp(1rem, -0.3815rem + 5.1643vw, 3.75rem);
+  --sctn-block-padding: clamp(3rem, 1.6813rem + 4.9296vw, 5.625rem);
+  --site-gutter: var(--sctn-inline-padding);
+  --content-width: 112.5rem;
 }
 ```
 
@@ -125,9 +130,17 @@ header.css
 ```css
 .site-header {
   display: block;
-  padding: 0;
+  padding-inline: var(--site-gutter);
+  padding-block: var(--text-20);
   background: var(--site-bg);
   color: var(--site-text);
+}
+
+.site-header__container {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: var(--content-width);
+  margin-inline: auto;
 }
 ```
 
@@ -138,9 +151,17 @@ footer.css
 ```css
 .site-footer {
   display: block;
-  padding: 0;
+  padding-inline: var(--site-gutter);
+  padding-block: var(--sctn-block-padding);
   background: var(--site-text);
   color: var(--site-bg);
+}
+
+.site-footer__container {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: var(--content-width);
+  margin-inline: auto;
 }
 ```
 
@@ -195,7 +216,15 @@ about.css
 ```css
 .about-hero {
   display: block;
-  padding: 0;
+  padding-inline: var(--site-gutter);
+  padding-block: var(--sctn-block-padding);
+}
+
+.about-hero__container {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: var(--content-width);
+  margin-inline: auto;
 }
 ```
 

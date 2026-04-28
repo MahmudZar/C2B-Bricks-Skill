@@ -28,6 +28,8 @@ Always adapt the dials to the user's prompt:
 - Use `min-height: 100dvh` for full-height hero sections, not `height: 100vh`.
 - Avoid complex percentage flex math for multi-column structures. Use `grid-template-columns`.
 - Use `max-width`, `margin-inline: auto`, and explicit container padding in CSS instead of Tailwind container utilities.
+- Use the shared section spacing tokens. Top-level sections get `padding-inline: var(--site-gutter)` and `padding-block: var(--sctn-block-padding)`.
+- Bricks containers get `inline-size: 100%`, `max-inline-size: var(--content-width)`, and `margin-inline: auto`.
 
 Example viewport-safe hero:
 
@@ -35,7 +37,8 @@ Example viewport-safe hero:
 .hero {
   display: block;
   min-height: 100dvh;
-  padding: 0;
+  padding-inline: var(--site-gutter);
+  padding-block: var(--sctn-block-padding);
 }
 
 .hero__container {
@@ -43,9 +46,9 @@ Example viewport-safe hero:
   grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
   align-items: center;
   gap: clamp(2rem, 6vw, 6rem);
-  max-width: 88rem;
+  inline-size: 100%;
+  max-inline-size: var(--content-width);
   margin-inline: auto;
-  padding: clamp(5rem, 8vw, 8rem) 1.5rem;
 }
 ```
 
@@ -106,6 +109,11 @@ Example:
   --lh-body-12: 1rem;
   --heading-line-height: calc(4px + 2ex);
   --text-line-height: calc(6px + 2ex);
+
+  --sctn-inline-padding: clamp(1rem, -0.3815rem + 5.1643vw, 3.75rem);
+  --sctn-block-padding: clamp(3rem, 1.6813rem + 4.9296vw, 5.625rem);
+  --site-gutter: var(--sctn-inline-padding);
+  --content-width: 112.5rem;
 }
 
 .feature__title {

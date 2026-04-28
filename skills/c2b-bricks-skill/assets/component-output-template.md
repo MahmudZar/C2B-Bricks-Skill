@@ -25,14 +25,17 @@ Use this structure for normal Bricks component delivery.
 
 .block-name {
   display: block;
-  padding: 0;
+  padding-inline: var(--site-gutter);
+  padding-block: var(--sctn-block-padding);
   background: var(--block-name-bg);
   color: var(--block-name-text);
 }
 
 .block-name__container {
   display: block;
-  padding: clamp(4rem, 8vw, 7rem) 1.5rem;
+  inline-size: 100%;
+  max-inline-size: var(--content-width);
+  margin-inline: auto;
 }
 ```
 

@@ -36,6 +36,11 @@ Use this exact global type scale for the default balanced/symmetrical Bricks out
   --lh-body-12: 1rem;
   --heading-line-height: calc(4px + 2ex);
   --text-line-height: calc(6px + 2ex);
+
+  --sctn-inline-padding: clamp(1rem, -0.3815rem + 5.1643vw, 3.75rem);
+  --sctn-block-padding: clamp(3rem, 1.6813rem + 4.9296vw, 5.625rem);
+  --site-gutter: var(--sctn-inline-padding);
+  --content-width: 112.5rem;
 }
 ```
 
@@ -47,8 +52,37 @@ Use these variables consistently:
 - H4 elements use `font-size: var(--h4)` and either `line-height: var(--lh-h4)` or `line-height: var(--heading-line-height)`.
 - Body and UI copy use `--text-12` through `--text-20` with the matching `--lh-body-*` token or `--text-line-height`.
 - All headings use `font-weight: 600` by default. Do not use `700`, `800`, or `900` unless the user explicitly requests a heavier brand style.
+- Sections use `padding-inline: var(--site-gutter)` and `padding-block: var(--sctn-block-padding)`.
+- Bricks containers use `inline-size: 100%` and `max-inline-size: var(--content-width)`.
 
 Only deviate for a deliberate high-variance editorial design, and keep the base variables available.
+
+### Section And Container Spacing
+
+Use this pattern for every top-level section unless the user provides a different spacing system:
+
+```html
+<section class="hero-sctn">
+  <div data-bricks="container" class="hero-sctn__container"></div>
+</section>
+```
+
+```css
+.hero-sctn {
+  display: block;
+  padding-inline: var(--site-gutter);
+  padding-block: var(--sctn-block-padding);
+}
+
+.hero-sctn__container {
+  display: block;
+  inline-size: 100%;
+  max-inline-size: var(--content-width);
+  margin-inline: auto;
+}
+```
+
+Do not put the main horizontal page padding on the container. Put section gutters on the section and width constraints on the container.
 
 ### Motion Tokens
 
@@ -142,16 +176,17 @@ Use this blueprint as the default mental model for a section with content and me
 
 .feature-showcase {
   display: block;
-  padding: 0;
+  padding-inline: var(--site-gutter);
+  padding-block: var(--sctn-block-padding);
   background: var(--feature-showcase-bg);
   color: var(--feature-showcase-text);
 }
 
 .feature-showcase__container {
   display: block;
-  max-width: 88rem;
+  inline-size: 100%;
+  max-inline-size: var(--content-width);
   margin-inline: auto;
-  padding: clamp(4rem, 8vw, 7rem) 1.5rem;
 }
 
 .feature-showcase__layout {
@@ -348,6 +383,11 @@ Include page `.js` files only when a page needs behavior.
   --lh-body-12: 1rem;
   --heading-line-height: calc(4px + 2ex);
   --text-line-height: calc(6px + 2ex);
+
+  --sctn-inline-padding: clamp(1rem, -0.3815rem + 5.1643vw, 3.75rem);
+  --sctn-block-padding: clamp(3rem, 1.6813rem + 4.9296vw, 5.625rem);
+  --site-gutter: var(--sctn-inline-padding);
+  --content-width: 112.5rem;
 
   --site-bg: #f7f4ee;
   --site-text: #171512;
